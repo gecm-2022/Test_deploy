@@ -1,29 +1,22 @@
-// api.js
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
+const API_URL = 'http://localhost:3001/api';
 
-const api = axios.create({
-  baseURL: API_URL,
-  withCredentials: true,
-});
-
-// Deployment APIs
 export const getDeployments = async () => {
-  const { data } = await api.get("/deployments");
-  return data;
+  const response = await axios.get(`${API_URL}/deployments`);
+  return response.data;
 };
 
 export const getDeployment = async (id) => {
-  const { data } = await api.get(`/deployments/${id}`);
-  return data;
+  const response = await axios.get(`${API_URL}/deployments/${id}`);
+  return response.data;
 };
 
-export const createDeployment = async (payload) => {
-  const  data  = await api.post("/deploy", payload);
-  return data;
+export const createDeployment = async (data) => {
+  const response = await axios.post(`${API_URL}/deployments`, data);
+  return response.data;
 };
 
 export const deleteDeployment = async (id) => {
-  await api.delete(`/deployments/${id}`);
+  await axios.delete(`${API_URL}/deployments/${id}`);
 };
